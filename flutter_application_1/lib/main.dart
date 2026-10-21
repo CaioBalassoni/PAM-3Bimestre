@@ -29,14 +29,21 @@ class _HomePageState extends State<HomePage> {
   int contador = 0;
 
   void decrement(){
-    contador--;
+    setState((){ //é o método usado para atualizar o estado interno do componente e agendar uma nova renderização
+      contador--;
     print(contador);
+    });
   }
  
   void increment(){
+    setState((){
       contador++;
     print(contador);
+    });
   }
+
+  bool get isEmpty => contador == 0;
+  bool get isFull => contador == 18;
   
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,8 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
        
         children: [
-          Text("Bem vindo!",
+          Text(
+            isFull ? "Está lotado" : "Bem vindo!",
           style: TextStyle(
             fontSize: 50,
             color: Colors.red,
@@ -81,9 +89,10 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(onPressed: decrement,
+              TextButton(
+                onPressed: isEmpty ? null : decrement,
               style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor:isEmpty ? Colors.blue.withOpacity(0.2) : Colors.blue,
                 fixedSize: const Size(100, 100),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
@@ -99,9 +108,9 @@ class _HomePageState extends State<HomePage> {
  
               SizedBox(width: 32),
  
-              TextButton(onPressed: increment,
+              TextButton(onPressed:isFull ? null : increment,
               style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor:isFull ? Colors.blue.withOpacity(0.2) : Colors.blue,
                 fixedSize: const Size(100, 100),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
@@ -123,7 +132,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
  
-// class HomePage extends StatelessWidget {
+// class HomePage extends StatelessWidget -> utilizamos o statelesswidget apenas para mostrar na tela, porém não atualiza {
 //   HomePage({super.key});
  
 //   int contador = 0;
