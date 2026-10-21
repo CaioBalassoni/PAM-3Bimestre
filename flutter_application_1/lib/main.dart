@@ -29,16 +29,12 @@ class _HomePageState extends State<HomePage> {
   int contador = 0;
 
   void decrement(){
-    setState(() {
-      contador--;
-    });
+    contador--;
     print(contador);
   }
  
   void increment(){
-    setState(() {
       contador++;
-    });
     print(contador);
   }
   
@@ -74,7 +70,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Padding(padding: EdgeInsets.all(40),
           child: Text(
-          contador.toString(),
+          contador.toString(), // Paramos aqui na aula dia 21/10 - pág 23
           style: TextStyle(
             fontSize: 100,
             color: Color.fromARGB(255, 4, 87, 154),
